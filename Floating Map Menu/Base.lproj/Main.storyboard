@@ -34,10 +34,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="locationManager" destination="fPo-eM-Jaz" id="vS5-5G-rUb"/>
                         <outlet property="mapView" destination="841-nc-0Sr" id="zDg-KO-MQT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="fPo-eM-Jaz" customClass="LocationManager" customModule="MapSearch" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
         </scene>

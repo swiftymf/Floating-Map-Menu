@@ -14,6 +14,7 @@
 		2A59273B224EF3A90081E29F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A592739224EF3A90081E29F /* LaunchScreen.storyboard */; };
 		2A592745224EF9BB0081E29F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592744224EF9BB0081E29F /* SearchCell.swift */; };
 		2A592747224EFF7C0081E29F /* TrashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592746224EFF7C0081E29F /* TrashTableViewController.swift */; };
+		2A592749224F05D70081E29F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592748224F05D60081E29F /* LocationManager.swift */; };
 		471E5ED1740826FF1770262C /* Pods_Floating_Map_Menu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		2A59273C224EF3A90081E29F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A592744224EF9BB0081E29F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		2A592746224EFF7C0081E29F /* TrashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTableViewController.swift; sourceTree = "<group>"; };
+		2A592748224F05D60081E29F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3B85CD27C169E04B3B14C35A /* Pods-Floating Map Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floating Map Menu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu.debug.xcconfig"; sourceTree = "<group>"; };
 		914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Floating_Map_Menu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC00782CE28D114F7A480041 /* Pods-Floating Map Menu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floating Map Menu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				2A592730224EF3A80081E29F /* AppDelegate.swift */,
+				2A592748224F05D60081E29F /* LocationManager.swift */,
 				2A592732224EF3A80081E29F /* ViewController.swift */,
 				2A592746224EFF7C0081E29F /* TrashTableViewController.swift */,
 				2A592744224EF9BB0081E29F /* SearchCell.swift */,
@@ -208,6 +211,7 @@
 			files = (
 				2A592733224EF3A80081E29F /* ViewController.swift in Sources */,
 				2A592747224EFF7C0081E29F /* TrashTableViewController.swift in Sources */,
+				2A592749224F05D70081E29F /* LocationManager.swift in Sources */,
 				2A592745224EF9BB0081E29F /* SearchCell.swift in Sources */,
 				2A592731224EF3A80081E29F /* AppDelegate.swift in Sources */,
 			);

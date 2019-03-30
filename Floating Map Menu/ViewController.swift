@@ -9,14 +9,17 @@
 import UIKit
 import FloatingPanel
 import MapKit
+import CoreLocation
 
 class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControllerDelegate {
 
     var fpc: FloatingPanelController!
     var trashVC: TrashTableViewController!
-
-    @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet private var locationManager: LocationManager!
+    @IBOutlet weak var mapView: MKMapView!
+    private var locationManagerObserver: NSKeyValueObservation?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,9 +34,14 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         
         view.addSubview(fpc.view)
         
-
+        mapView.userTrackingMode = .follow
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationManager.requestLocation()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         fpc.removePanelFromParent(animated: true)
