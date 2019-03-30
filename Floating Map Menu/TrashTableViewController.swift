@@ -81,10 +81,6 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.endUpdates()
     }
     
-    // TODO: - add search bar
-    //     private var searchController: UISearchController!
-    // more code found in SearchResultsTableViewController in MapSearch project
-    
     
     // TODO: - add search functions
     // code is in MapSearch project

@@ -65,6 +65,88 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         fpc.move(to: .full, animated: true)
     }
 
+    
+    // MARK: FloatingPanelControllerDelegate
+    
+    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+        switch newCollection.verticalSizeClass {
+        case .compact:
+            fpc.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
+            fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
+            return SearchPanelLandscapeLayout()
+        default:
+            fpc.surfaceView.borderWidth = 0.0
+            fpc.surfaceView.borderColor = nil
+            return nil
+        }
+    }
+    
+    func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        let y = vc.surfaceView.frame.origin.y
+        let tipY = vc.originYOfSurface(for: .tip)
+        if y > tipY - 44.0 {
+            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
+            self.trashVC.tableView.alpha = progress
+        }
+    }
+    
+    func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
+        if vc.position == .full {
+            trashVC.searchBar?.showsCancelButton = false
+            trashVC.searchBar?.resignFirstResponder()
+        }
+    }
+    
+    func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
+        if targetPosition != .full {
+            trashVC.hideHeader()
+        }
+        
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0,
+                       options: .allowUserInteraction,
+                       animations: {
+                        if targetPosition == .tip {
+                            self.trashVC.tableView.alpha = 0.0
+                        } else {
+                            self.trashVC.tableView.alpha = 1.0
+                        }
+        }, completion: nil)
+    }
 }
 
-
+public class SearchPanelLandscapeLayout: FloatingPanelLayout {
+    public var initialPosition: FloatingPanelPosition {
+        return .tip
+    }
+    
+    public var supportedPositions: Set<FloatingPanelPosition> {
+        return [.full, .tip]
+    }
+    
+    public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
+        switch position {
+        case .full: return 16.0
+        case .tip: return 69.0
+        default: return nil
+        }
+    }
+    
+    public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
+        if #available(iOS 11.0, *) {
+            return [
+                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8.0),
+                surfaceView.widthAnchor.constraint(equalToConstant: 291),
+            ]
+        } else {
+            return [
+                surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0),
+                surfaceView.widthAnchor.constraint(equalToConstant: 291),
+            ]
+        }
+    }
+    
+    public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
+        return 0.0
+    }
+}
