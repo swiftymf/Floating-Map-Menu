@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A592731224EF3A80081E29F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592730224EF3A80081E29F /* AppDelegate.swift */; };
+		2A592733224EF3A80081E29F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592732224EF3A80081E29F /* ViewController.swift */; };
+		2A592736224EF3A80081E29F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A592734224EF3A80081E29F /* Main.storyboard */; };
+		2A592738224EF3A90081E29F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A592737224EF3A90081E29F /* Assets.xcassets */; };
+		2A59273B224EF3A90081E29F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A592739224EF3A90081E29F /* LaunchScreen.storyboard */; };
+		2A592745224EF9BB0081E29F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592744224EF9BB0081E29F /* SearchCell.swift */; };
+		2A592747224EFF7C0081E29F /* TrashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592746224EFF7C0081E29F /* TrashTableViewController.swift */; };
+		471E5ED1740826FF1770262C /* Pods_Floating_Map_Menu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2A59272D224EF3A80081E29F /* Floating Map Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Floating Map Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A592730224EF3A80081E29F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2A592732224EF3A80081E29F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2A592735224EF3A80081E29F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2A592737224EF3A90081E29F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A59273A224EF3A90081E29F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2A59273C224EF3A90081E29F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A592744224EF9BB0081E29F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		2A592746224EFF7C0081E29F /* TrashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTableViewController.swift; sourceTree = "<group>"; };
+		3B85CD27C169E04B3B14C35A /* Pods-Floating Map Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floating Map Menu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu.debug.xcconfig"; sourceTree = "<group>"; };
+		914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Floating_Map_Menu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC00782CE28D114F7A480041 /* Pods-Floating Map Menu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floating Map Menu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A59272A224EF3A80081E29F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				471E5ED1740826FF1770262C /* Pods_Floating_Map_Menu.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A592724224EF3A80081E29F = {
+			isa = PBXGroup;
+			children = (
+				2A59272F224EF3A80081E29F /* Floating Map Menu */,
+				2A59272E224EF3A80081E29F /* Products */,
+				D0B350ACFB43F572B7C08B13 /* Pods */,
+				6297FE8FB5905AEF7088F970 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2A59272E224EF3A80081E29F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A59272D224EF3A80081E29F /* Floating Map Menu.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A59272F224EF3A80081E29F /* Floating Map Menu */ = {
+			isa = PBXGroup;
+			children = (
+				2A592730224EF3A80081E29F /* AppDelegate.swift */,
+				2A592732224EF3A80081E29F /* ViewController.swift */,
+				2A592746224EFF7C0081E29F /* TrashTableViewController.swift */,
+				2A592744224EF9BB0081E29F /* SearchCell.swift */,
+				2A592734224EF3A80081E29F /* Main.storyboard */,
+				2A592737224EF3A90081E29F /* Assets.xcassets */,
+				2A592739224EF3A90081E29F /* LaunchScreen.storyboard */,
+				2A59273C224EF3A90081E29F /* Info.plist */,
+			);
+			path = "Floating Map Menu";
+			sourceTree = "<group>";
+		};
+		6297FE8FB5905AEF7088F970 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0B350ACFB43F572B7C08B13 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B85CD27C169E04B3B14C35A /* Pods-Floating Map Menu.debug.xcconfig */,
+				CC00782CE28D114F7A480041 /* Pods-Floating Map Menu.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A59272C224EF3A80081E29F /* Floating Map Menu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A59273F224EF3A90081E29F /* Build configuration list for PBXNativeTarget "Floating Map Menu" */;
+			buildPhases = (
+				835748311FB573E2D302BCF0 /* [CP] Check Pods Manifest.lock */,
+				2A592729224EF3A80081E29F /* Sources */,
+				2A59272A224EF3A80081E29F /* Frameworks */,
+				2A59272B224EF3A80081E29F /* Resources */,
+				E244E041CD47F323B293A869 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Floating Map Menu";
+			productName = "Floating Map Menu";
+			productReference = 2A59272D224EF3A80081E29F /* Floating Map Menu.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A592725224EF3A80081E29F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = SwiftyMF;
+				TargetAttributes = {
+					2A59272C224EF3A80081E29F = {
+						CreatedOnToolsVersion = 10.2;
+					};
+				};
+			};
+			buildConfigurationList = 2A592728224EF3A80081E29F /* Build configuration list for PBXProject "Floating Map Menu" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2A592724224EF3A80081E29F;
+			productRefGroup = 2A59272E224EF3A80081E29F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2A59272C224EF3A80081E29F /* Floating Map Menu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2A59272B224EF3A80081E29F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A59273B224EF3A90081E29F /* LaunchScreen.storyboard in Resources */,
+				2A592738224EF3A90081E29F /* Assets.xcassets in Resources */,
+				2A592736224EF3A80081E29F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		835748311FB573E2D302BCF0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Floating Map Menu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E244E041CD47F323B293A869 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A592729224EF3A80081E29F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A592733224EF3A80081E29F /* ViewController.swift in Sources */,
+				2A592747224EFF7C0081E29F /* TrashTableViewController.swift in Sources */,
+				2A592745224EF9BB0081E29F /* SearchCell.swift in Sources */,
+				2A592731224EF3A80081E29F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2A592734224EF3A80081E29F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A592735224EF3A80081E29F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2A592739224EF3A90081E29F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A59273A224EF3A90081E29F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2A59273D224EF3A90081E29F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2A59273E224EF3A90081E29F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2A592740224EF3A90081E29F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B85CD27C169E04B3B14C35A /* Pods-Floating Map Menu.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYZ637VQH4;
+				INFOPLIST_FILE = "Floating Map Menu/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.markith.Floating-Map-Menu";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A592741224EF3A90081E29F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC00782CE28D114F7A480041 /* Pods-Floating Map Menu.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYZ637VQH4;
+				INFOPLIST_FILE = "Floating Map Menu/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.markith.Floating-Map-Menu";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A592728224EF3A80081E29F /* Build configuration list for PBXProject "Floating Map Menu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A59273D224EF3A90081E29F /* Debug */,
+				2A59273E224EF3A90081E29F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A59273F224EF3A90081E29F /* Build configuration list for PBXNativeTarget "Floating Map Menu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A592740224EF3A90081E29F /* Debug */,
+				2A592741224EF3A90081E29F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A592725224EF3A80081E29F /* Project object */;
+}
