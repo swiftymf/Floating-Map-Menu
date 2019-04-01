@@ -15,6 +15,9 @@
 		2A592745224EF9BB0081E29F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592744224EF9BB0081E29F /* SearchCell.swift */; };
 		2A592747224EFF7C0081E29F /* TrashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592746224EFF7C0081E29F /* TrashTableViewController.swift */; };
 		2A592749224F05D70081E29F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A592748224F05D60081E29F /* LocationManager.swift */; };
+		2A59274B224F45E10081E29F /* SuggestionsTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A59274A224F45E10081E29F /* SuggestionsTableTableViewController.swift */; };
+		2A59274D224F48D10081E29F /* MKPlacemark+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A59274C224F48D10081E29F /* MKPlacemark+Extension.swift */; };
+		2AEDC47B224F614F00ADA814 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEDC47A224F614F00ADA814 /* PlaceAnnotation.swift */; };
 		471E5ED1740826FF1770262C /* Pods_Floating_Map_Menu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,9 @@
 		2A592744224EF9BB0081E29F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		2A592746224EFF7C0081E29F /* TrashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTableViewController.swift; sourceTree = "<group>"; };
 		2A592748224F05D60081E29F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		2A59274A224F45E10081E29F /* SuggestionsTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionsTableTableViewController.swift; sourceTree = "<group>"; };
+		2A59274C224F48D10081E29F /* MKPlacemark+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKPlacemark+Extension.swift"; sourceTree = "<group>"; };
+		2AEDC47A224F614F00ADA814 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		3B85CD27C169E04B3B14C35A /* Pods-Floating Map Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floating Map Menu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu.debug.xcconfig"; sourceTree = "<group>"; };
 		914433DA67EA31E4FEA1301E /* Pods_Floating_Map_Menu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Floating_Map_Menu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC00782CE28D114F7A480041 /* Pods-Floating Map Menu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floating Map Menu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Floating Map Menu/Pods-Floating Map Menu.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,7 +77,10 @@
 				2A592748224F05D60081E29F /* LocationManager.swift */,
 				2A592732224EF3A80081E29F /* ViewController.swift */,
 				2A592746224EFF7C0081E29F /* TrashTableViewController.swift */,
+				2A59274A224F45E10081E29F /* SuggestionsTableTableViewController.swift */,
 				2A592744224EF9BB0081E29F /* SearchCell.swift */,
+				2A59274C224F48D10081E29F /* MKPlacemark+Extension.swift */,
+				2AEDC47A224F614F00ADA814 /* PlaceAnnotation.swift */,
 				2A592734224EF3A80081E29F /* Main.storyboard */,
 				2A592737224EF3A90081E29F /* Assets.xcassets */,
 				2A592739224EF3A90081E29F /* LaunchScreen.storyboard */,
@@ -209,10 +218,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AEDC47B224F614F00ADA814 /* PlaceAnnotation.swift in Sources */,
 				2A592733224EF3A80081E29F /* ViewController.swift in Sources */,
 				2A592747224EFF7C0081E29F /* TrashTableViewController.swift in Sources */,
 				2A592749224F05D70081E29F /* LocationManager.swift in Sources */,
+				2A59274D224F48D10081E29F /* MKPlacemark+Extension.swift in Sources */,
 				2A592745224EF9BB0081E29F /* SearchCell.swift in Sources */,
+				2A59274B224F45E10081E29F /* SuggestionsTableTableViewController.swift in Sources */,
 				2A592731224EF3A80081E29F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

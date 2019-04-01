@@ -24,13 +24,23 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="841-nc-0Sr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ky9-sU-qwM">
+                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
+                                <state key="normal" title="Search this area"/>
+                                <connections>
+                                    <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wCc-6z-MPb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ky9-sU-qwM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ckq-qs-Xrq"/>
                             <constraint firstItem="841-nc-0Sr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SD4-sh-oTl"/>
                             <constraint firstItem="841-nc-0Sr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Uuv-HS-EqK"/>
                             <constraint firstAttribute="bottom" secondItem="841-nc-0Sr" secondAttribute="bottom" id="cgV-21-mXY"/>
                             <constraint firstAttribute="trailing" secondItem="841-nc-0Sr" secondAttribute="trailing" id="lgC-Ka-PwP"/>
+                            <constraint firstItem="ky9-sU-qwM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oIB-Ki-juv"/>
+                            <constraint firstItem="ky9-sU-qwM" firstAttribute="top" secondItem="NIk-eN-om0" secondAttribute="bottom" id="tIM-Jp-D6w"/>
                         </constraints>
                     </view>
                     <connections>
@@ -69,7 +79,7 @@
                                             <rect key="frame" x="0.0" y="66" width="414" height="916"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="119" id="aNM-iB-DsN" customClass="SearchCell" customModule="Floating_Map_Menu" customModuleProvider="target">
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="119" id="aNM-iB-DsN" customClass="SearchCell" customModule="Floating_Map_Menu" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="28" width="414" height="119"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aNM-iB-DsN" id="55C-N4-q0q">
@@ -79,13 +89,13 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TUL-AH-W57">
                                                                 <rect key="frame" x="36" y="27" width="342" height="65"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oO-19-mfE">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oO-19-mfE">
                                                                         <rect key="frame" x="0.0" y="0.0" width="342" height="36.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3T-qe-KbD">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3T-qe-KbD">
                                                                         <rect key="frame" x="0.0" y="44.5" width="342" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
@@ -131,11 +141,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="locationManager" destination="xo6-GF-8Rs" id="IDR-ri-OeU"/>
                         <outlet property="searchBar" destination="dH0-Hv-cM1" id="AXx-H7-GQj"/>
                         <outlet property="tableView" destination="Guf-G7-bZo" id="Zqq-5i-vWB"/>
                         <outlet property="visualEffectView" destination="ZIC-9Q-sdR" id="evu-79-wWP"/>
                     </connections>
                 </viewController>
+                <customObject id="xo6-GF-8Rs" customClass="LocationManager" customModule="Floating_Map_Menu" customModuleProvider="target"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oqa-95-KJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="888" y="127"/>

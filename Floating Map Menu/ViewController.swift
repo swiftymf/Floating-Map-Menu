@@ -15,14 +15,24 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
 
     var fpc: FloatingPanelController!
     var trashVC: TrashTableViewController!
-    
+    var places: [MKMapItem]?
+    var mapItems: [MKMapItem]?
+    var searchBarText = ""
+
     @IBOutlet private var locationManager: LocationManager!
     @IBOutlet weak var mapView: MKMapView!
     private var locationManagerObserver: NSKeyValueObservation?
+    
+    private var localSearch: MKLocalSearch? {
+        willSet {
+            // Clear the results and cancel the currently running local search before starting a new search.
+            places = nil
+            localSearch?.cancel()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fpc = FloatingPanelController()
         fpc.delegate = self
         
@@ -40,8 +50,8 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        locationManager.requestLocation()
+        super.viewDidAppear(true)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -112,6 +122,74 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
                             self.trashVC.tableView.alpha = 1.0
                         }
         }, completion: nil)
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: UIButton) {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        mapMovedSearch(for: trashVC.searchBar?.text) 
+        displayAnnotations()
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        mapMovedSearch(for: trashVC.searchBar?.text)
+    }
+    
+    func mapMovedSearch(for queryString: String?) {
+        let searchRequest = MKLocalSearch.Request()
+        let region = MKCoordinateRegion(center: mapView.centerCoordinate, latitudinalMeters: 12_000, longitudinalMeters: 12_000)
+        searchRequest.naturalLanguageQuery = queryString
+        searchRequest.region = region
+
+        // TODO: - combine these function into one, no need to call them both and have them display the same things
+        
+        // This produces map annotations, but takes two button taps to show up
+        self.search(using: searchRequest)
+        // This produces items for the tableView cells
+        trashVC.search(using: searchRequest)
+    }
+
+    func search(using searchRequest: MKLocalSearch.Request) {
+        
+        // Use the network activity indicator as a hint to the user that a search is in progress.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        localSearch = MKLocalSearch(request: searchRequest)
+        localSearch?.start { [weak self] (response, error) in
+            guard error == nil else {
+                //self?.displaySearchError(error)
+                return
+            }
+            self?.mapItems = response?.mapItems // mapItems DO change when the map view moves
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
+    }
+    
+    func displayAnnotations() {
+        
+        // This is always one behind the actual button press
+        // Doesn't seem to get called until the second button press
+        
+        guard let mapItems = mapItems else { return }
+        
+        if mapItems.count == 1, let item = mapItems.first {
+            title = item.name
+        } else {
+            title = NSLocalizedString("TITLE_ALL_PLACES", comment: "All Places view controller title")
+        }
+        // Turn the array of MKMapItem objects into an annotation with a title and URL that can be shown on the map.
+        let annotations = mapItems.compactMap { (mapItem) -> PlaceAnnotation? in
+            guard let coordinate = mapItem.placemark.location?.coordinate else { return nil }
+            
+            let annotation = PlaceAnnotation(coordinate: coordinate)
+            annotation.title = mapItem.name
+            annotation.url = mapItem.url
+            
+            print("mapItem annotation: \(mapItem.name)")
+            
+            return annotation
+        }
+        
+        mapView.addAnnotations(annotations)
     }
 }
 
