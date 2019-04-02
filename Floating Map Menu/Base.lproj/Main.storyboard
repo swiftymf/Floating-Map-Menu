@@ -46,6 +46,7 @@
                     <connections>
                         <outlet property="locationManager" destination="fPo-eM-Jaz" id="vS5-5G-rUb"/>
                         <outlet property="mapView" destination="841-nc-0Sr" id="zDg-KO-MQT"/>
+                        <outlet property="searchButton" destination="ky9-sU-qwM" id="TlZ-CH-LIM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

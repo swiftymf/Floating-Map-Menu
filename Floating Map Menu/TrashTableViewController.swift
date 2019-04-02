@@ -30,7 +30,6 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
             // Clear the results and cancel the currently running local search before starting a new search.
             places = nil
             localSearch?.cancel()
-            print("localSearch willSet")
         }
     }
     
@@ -56,7 +55,7 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
         locationManager.requestLocation()
         tableView.dataSource = self
         tableView.delegate = self
-        searchController.searchBar.delegate = self
+        searchBar?.placeholder = "Search for a place or address"
         definesPresentationContext = true
 
     }
@@ -73,7 +72,8 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
             visualEffectView.clipsToBounds = true
         }
     }
-    
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
         print("awakeFromNib")
@@ -129,38 +129,6 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.endUpdates()
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let mapViewController = segue.destination as? TrashTableViewController else {
-            return
-        }
-        
-        if segue.identifier == SegueID.showDetail.rawValue {
-            // Get the single item.
-            guard let selectedItemPath = tableView.indexPathForSelectedRow, let mapItem = places?[selectedItemPath.row] else { return }
-            
-            // Pass the new bounding region to the map destination view controller and center it on the single placemark.
-            var region = boundingRegion
-            region?.center = mapItem.placemark.coordinate
-            mapViewController.boundingRegion = region
-            mapViewController.searchBarText = searchController.searchBar.text ?? ""
-            
-            // Pass the individual place to our map destination view controller.
-            mapViewController.mapItems = [mapItem]
-        } else if segue.identifier == SegueID.showAll.rawValue {
-            
-            // Pass the new bounding region to the map destination view controller.
-            mapViewController.boundingRegion = boundingRegion
-            
-            // Pass the list of places found to our map destination view controller.
-            mapViewController.mapItems = places
-            
-            // Only sets this if the user presses Search on the keyboard and doesn't choose from the tableView list
-            mapViewController.searchBarText = searchController.searchBar.text ?? ""
-        }
-    }
-  
-    
     /// - Parameter suggestedCompletion: A search completion provided by `MKLocalSearchCompleter` when tapping on a search completion table row
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
         print("search(for suggestionCompletion")
@@ -171,7 +139,6 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
     
     /// - Parameter queryString: A search string from the text the user entered into `UISearchBar`
     private func search(for queryString: String?) {
-        print("search(for queryString")
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = queryString
         search(using: searchRequest)
@@ -179,13 +146,6 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
     
     /// - Tag: SearchRequest
     func search(using searchRequest: MKLocalSearch.Request) {
-        print("search(using searchRequest")
-        // Confine the map search area to an area around the user's current location.
-        // This shouldn't get called if the search area button is pressed
-//        if let region = boundingRegion {
-//            searchRequest.region = region
-//        }
-        
         // Use the network activity indicator as a hint to the user that a search is in progress.
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
@@ -195,10 +155,7 @@ class TrashTableViewController: UIViewController, UITableViewDataSource, UITable
                 self?.displaySearchError(error)
                 return
             }
-            
             self?.places = response?.mapItems
-            print("mapItems: \(self?.places)")
-            
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
@@ -238,7 +195,6 @@ extension TrashTableViewController {
         
         if let mapItem = places?[indexPath.row] {
             cell.titleLabel?.text = mapItem.name
-            print("mapItem in tableView: \(mapItem.name)")
             cell.subTitleLabel?.text = "\(String(describing: mapItem.placemark.location?.coordinate))"
         }
         
@@ -277,33 +233,28 @@ extension TrashTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         dismiss(animated: true, completion: nil)
-        
-        // The user tapped search on the `UISearchBar` or on the keyboard. Since they didn't
-        // select a row with a suggested completion, run the search with the query text in the search field.
         search(for: searchBar.text)
     }
 }
 
 // TODO: - Search Here button
 // Search button is added
-// Annotations are not showing up on map - check to make sure they're loading then maybe map reload/refresh?
-// Search button makes some mapItem info populate in tableView!
 // need to place at bottom of view and hide until needed
 // In Apple Maps app, looks like a navigation bar/button pops up when the regionDidChange is called?
 
-// TODO: - add search functions
-// code is in MapSearch project
-
 // TODO: - add suggestion completion functions
-// code is in MapSearch project
+// code is in this project, but it's not currently working at all
 // This needs to show up like another Floating Menu
 
-// TODO: - mapItems model
-// var places: [MKMapItem]?
-
-// TODO: - custom annotation model
+// TODO: - custom annotation model ********************
 // What properties do I want to show in the annotation so people don't have to click into detail
 // Or do I just want to show detail in the Floating view
 
 // TODO: - Show details when cell is tapped
-//
+
+// TODO: - Currently using search functions in both viewcontroller files, change to just being in one
+
+// TODO: - tableView - turn coordinates into an address or just get the address from the search results
+
+// TODO: - Cleanup: rename trashVC, rename refreshButton, find other things to rename
+// refactor code so functions and names make more sense, no copy/pasta code!

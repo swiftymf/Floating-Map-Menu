@@ -15,24 +15,33 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
 
     var fpc: FloatingPanelController!
     var trashVC: TrashTableViewController!
-    var places: [MKMapItem]?
-    var mapItems: [MKMapItem]?
+//    var places: [MKMapItem]?
+    var mapItems: [MKMapItem]?  {
+        didSet {
+            displayAnnotations()
+        }
+    }
     var searchBarText = ""
 
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet private var locationManager: LocationManager!
     @IBOutlet weak var mapView: MKMapView!
     private var locationManagerObserver: NSKeyValueObservation?
-    
+    private var mapChangedFromUserInteraction = false
+
     private var localSearch: MKLocalSearch? {
         willSet {
             // Clear the results and cancel the currently running local search before starting a new search.
-            places = nil
+            mapItems = nil
             localSearch?.cancel()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchButton.isHidden = true
+        self.mapView.delegate = self
         fpc = FloatingPanelController()
         fpc.delegate = self
         
@@ -41,17 +50,20 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         fpc.set(contentViewController: trashVC)
         fpc.track(scrollView: trashVC.tableView)
         fpc.addPanel(toParent: self)
-        
-        trashVC.searchBar?.delegate = self
-        
+                
         view.addSubview(fpc.view)
         
         mapView.userTrackingMode = .follow
+        
+        // might need this for something?
+//        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
+        trashVC.searchBar?.delegate = self
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,6 +72,12 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
     }
     
     // MARK: UISearchBarDelegate
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        mapMovedSearch(for: trashVC.searchBar?.text)
+        fpc.move(to: .half, animated: true)
+    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -67,7 +85,7 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         trashVC.hideHeader()
         fpc.move(to: .half, animated: true)
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         trashVC.showHeader()
@@ -126,13 +144,35 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
     
     @IBAction func refreshButtonTapped(_ sender: UIButton) {
         mapView.removeAnnotations(mapView.annotations)
-        
-        mapMovedSearch(for: trashVC.searchBar?.text) 
-        displayAnnotations()
+        mapMovedSearch(for: trashVC.searchBar?.text)
     }
     
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        mapMovedSearch(for: trashVC.searchBar?.text)
+    // MapView Delegate - Unhide search button and update search results when user moves map
+    
+    private func mapViewRegionDidChangeFromUserInteraction() -> Bool {
+        let view = self.mapView.subviews[0]
+        //  Look through gesture recognizers to determine whether this region change is from user interaction
+        if let gestureRecognizers = view.gestureRecognizers {
+            for recognizer in gestureRecognizers {
+                if( recognizer.state == UIGestureRecognizer.State.began || recognizer.state == UIGestureRecognizer.State.ended ) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        mapChangedFromUserInteraction = mapViewRegionDidChangeFromUserInteraction()
+        if (mapChangedFromUserInteraction) {
+            // user changed map region
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if (mapChangedFromUserInteraction) {
+            searchButton.isHidden = false
+        }
     }
     
     func mapMovedSearch(for queryString: String?) {
@@ -142,16 +182,12 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         searchRequest.region = region
 
         // TODO: - combine these function into one, no need to call them both and have them display the same things
-        
-        // This produces map annotations, but takes two button taps to show up
         self.search(using: searchRequest)
-        // This produces items for the tableView cells
         trashVC.search(using: searchRequest)
     }
 
     func search(using searchRequest: MKLocalSearch.Request) {
         
-        // Use the network activity indicator as a hint to the user that a search is in progress.
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         localSearch = MKLocalSearch(request: searchRequest)
         localSearch?.start { [weak self] (response, error) in
@@ -165,12 +201,11 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
     }
     
     func displayAnnotations() {
-        
-        // This is always one behind the actual button press
-        // Doesn't seem to get called until the second button press
-        
+
+        mapView.removeAnnotations(mapView.annotations)
+
         guard let mapItems = mapItems else { return }
-        
+
         if mapItems.count == 1, let item = mapItems.first {
             title = item.name
         } else {
@@ -184,7 +219,6 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
             annotation.title = mapItem.name
             annotation.url = mapItem.url
             
-            print("mapItem annotation: \(mapItem.name)")
             
             return annotation
         }
