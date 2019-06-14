@@ -6,22 +6,28 @@
 //  Copyright © 2019 SwiftyMF. All rights reserved.
 //
 
-import UIKit
+import CoreLocation
+import Firebase
 import FloatingPanel
 import MapKit
-import CoreLocation
+import UIKit
 
 class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControllerDelegate, UISearchBarDelegate {
 
     var fpc: FloatingPanelController!
+    var detailsFpc: FloatingPanelController!
+    var detailsVC: DetailsViewController!
     var trashVC: TrashTableViewController!
-//    var places: [MKMapItem]?
     var mapItems: [MKMapItem]?  {
         didSet {
             displayAnnotations()
         }
     }
     var searchBarText = ""
+    var detailsName = ""
+    var detailsAddress = ""
+    var detailsPhone = ""
+    
 
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet private var locationManager: LocationManager!
@@ -36,34 +42,41 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
             localSearch?.cancel()
         }
     }
+    
+    var mockAnnotations = [PlaceAnnotation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        ref = Database.database().reference()
+//        print("ref: \(ref)")
         
+        showSearchTableView()
+
         searchButton.isHidden = true
         self.mapView.delegate = self
+        
+        mapView.userTrackingMode = .follow
+        
+    }
+    
+    func showSearchTableView() {
         fpc = FloatingPanelController()
         fpc.delegate = self
         
         trashVC = storyboard?.instantiateViewController(withIdentifier: "TrashPanel") as? TrashTableViewController
         
         fpc.set(contentViewController: trashVC)
-        fpc.track(scrollView: trashVC.tableView)
+        fpc.track(scrollView: trashVC?.tableView)
         fpc.addPanel(toParent: self)
-                
-        view.addSubview(fpc.view)
-        
-        mapView.userTrackingMode = .follow
-        
-        // might need this for something?
-//        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
+        fpc.move(to: .tip, animated: true)
 
+        view.addSubview(fpc.view)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         trashVC.searchBar?.delegate = self
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,14 +96,14 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton  = false
         trashVC.hideHeader()
-        fpc.move(to: .half, animated: true)
+        fpc.move(to: .tip, animated: true)
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         trashVC.showHeader()
         trashVC.tableView.alpha = 1.0
-        fpc.move(to: .full, animated: true)
+        fpc.move(to: .half, animated: true)
     }
 
     
@@ -162,14 +175,8 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         return false
     }
     
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        mapChangedFromUserInteraction = mapViewRegionDidChangeFromUserInteraction()
-        if (mapChangedFromUserInteraction) {
-            // user changed map region
-        }
-    }
-    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        mapChangedFromUserInteraction = mapViewRegionDidChangeFromUserInteraction()
         if (mapChangedFromUserInteraction) {
             searchButton.isHidden = false
         }
@@ -184,10 +191,12 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
         // TODO: - combine these function into one, no need to call them both and have them display the same things
         self.search(using: searchRequest)
         trashVC.search(using: searchRequest)
+
+        searchButton.isHidden = true
     }
 
     func search(using searchRequest: MKLocalSearch.Request) {
-        
+
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         localSearch = MKLocalSearch(request: searchRequest)
         localSearch?.start { [weak self] (response, error) in
@@ -195,35 +204,58 @@ class ViewController: UIViewController, MKMapViewDelegate, FloatingPanelControll
                 //self?.displaySearchError(error)
                 return
             }
-            self?.mapItems = response?.mapItems // mapItems DO change when the map view moves
+            self?.mapItems = response?.mapItems
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
     
     func displayAnnotations() {
-
+        
         mapView.removeAnnotations(mapView.annotations)
-
+        
         guard let mapItems = mapItems else { return }
-
+        
         if mapItems.count == 1, let item = mapItems.first {
             title = item.name
         } else {
             title = NSLocalizedString("TITLE_ALL_PLACES", comment: "All Places view controller title")
         }
-        // Turn the array of MKMapItem objects into an annotation with a title and URL that can be shown on the map.
-        let annotations = mapItems.compactMap { (mapItem) -> PlaceAnnotation? in
+        
+        // TODO: - If myDB already contains location, ignore search result for that location
+        // Pretty sure this works now
+        // Just need to figure out how to only show the custom ones in the current mapview
+        
+        let namesInDBSet = Set(mockAnnotations.map{$0.title})
+        let combined = mapItems.filter {!namesInDBSet.contains($0.name)}
+        
+        // keep working on this, maybe in playgrounds?
+//        let allAnnotations = response.items.filter {!customSet.contains($0.name) in
+//            let annotation = PlaceAnnotation(coordinate: coordinate)
+//            annotation.title = $1.name
+//            mapView.addAnnotations(annotation)
+//        } else {
+//            annotation.title = $0.name
+//            mapView.addAnnotations(annotation)
+//        }
+        
+        let annotations1 = combined.compactMap { (mapItem) -> PlaceAnnotation? in
             guard let coordinate = mapItem.placemark.location?.coordinate else { return nil }
-            
             let annotation = PlaceAnnotation(coordinate: coordinate)
             annotation.title = mapItem.name
             annotation.url = mapItem.url
             
-            
             return annotation
         }
         
-        mapView.addAnnotations(annotations)
+//        let annotations2 = mockAnnotations.compactMap { (mockAnnotation) -> PlaceAnnotation? in
+//            let coordinate = mockAnnotation.coordinate
+//            let annotation = PlaceAnnotation(coordinate: coordinate)
+//            annotation.title = mockAnnotation.title
+//            return annotation
+//        }
+        
+        mapView.addAnnotations(annotations1)
+//        mapView.addAnnotations(annotations2)
     }
 }
 

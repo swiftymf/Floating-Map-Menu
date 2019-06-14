@@ -7,4 +7,7 @@ target 'Floating Map Menu' do
 
   # Pods for Floating Map Menu
 pod 'FloatingPanel'
+pod 'Firebase/Core'
+pod 'Firebase/Firestore'
+
 end
